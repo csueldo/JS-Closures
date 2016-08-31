@@ -103,11 +103,14 @@ the module pattern to achieve this. */
 
 function counterFactory(value) {
 
-  // Code here.
-
-
-  return {
-  }
+    return {
+      inc: function() {
+      return value += 1;
+    }
+    , dec: function() {
+      return value -= 1;
+    }
+  };
 }
 
 
@@ -132,13 +135,15 @@ will return 'You're doing awesome, keep it up firstname lastname.' */
 
 function motivation(firstname, lastname){
 
-  var welcomeText = 'You\'re doing awesome, keep it up ';
+   var welcomeText = 'You\'re doing awesome, keep it up ';
 
-  // code message function here.
+  function message() {
+    return welcomeText + firstname + " " + lastname + ".";
+  }
 
 
   //Uncommment this to return the value of your invoked message function
-  //return message();
+  return message();
 
 }
 
@@ -177,13 +182,15 @@ var module = (function() {
 	// outside our lexical scope
 
   return {
-    // Code here.
+        publicMethod: function(){
+        return privateMethod();
+      }
   };
 
 })();
 
 // Uncomment this after you create your public method
-//   module.publicMethod();
+  module.publicMethod();
 
 
 
