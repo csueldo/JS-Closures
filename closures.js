@@ -213,13 +213,14 @@ then 3, etc). Run this code in your console to see what the output is. */
 // To make this code work you will need to create a new scope for every iteration.
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000)
+    var count = newScope(i);
+    setTimeout(count, i * 1000);
   }
 
-  function newScope(i) {
-    console.log(i)
+  function newScope(count) {
+    return function (){
+    console.log(count);
+  }
   }
 }
 timeOutCounter();
@@ -235,8 +236,16 @@ timeOutCounter();
 
 var funcArray = [];
 
-/*
-  Make the following code work
+for(var i=0; i<=5; i++){
+   funcArray.push(we(i));
+ }
+ function we (ref){
+   return function(){
+     return ref;
+   };
+ }
+
+  // Make the following code work
 
   funcArray[0]() //0
   funcArray[1]() //1
@@ -245,5 +254,5 @@ var funcArray = [];
   funcArray[4]() //4
   funcArray[5]() //5
 
-  *Hint: Don't let this fool you. Break down what's really happening here.
-*/
+//   *Hint: Don't let this fool you. Break down what's really happening here.
+// */
